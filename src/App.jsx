@@ -1,7 +1,8 @@
-
 import './App.css';
-
 import React, { useState } from "react";
+import Navbar from './components/Navbar/Navbar';
+import bgImage from './assets/istockphoto-826661764-640x640.jpg';
+
 
 function App() {
   const [task, setTask] = useState("");
@@ -24,27 +25,31 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-indigo-900 to-blue-700 p-4">
+    <div
+  style={{ backgroundImage: `url(${bgImage})` }}
+  className="min-h-screen flex justify-center items-start pt-28 p-4"
+>
+      <Navbar/>
+      {/* NEON Glow Wrapper */}
+      <div className="w-full max-w-lg bg-[#0a0a0a] border border-yellow-400/40 shadow-[0_0_25px_5px_rgba(255,255,0,0.25)] rounded-3xl p-8 animate-[float_4s_ease-in-out_infinite]">
 
-      {/* Card */}
-      <div className="bg-white w-full max-w-lg rounded-3xl shadow-xl p-8">
-
-        <h1 className="text-3xl font-bold text-indigo-900 mb-6 flex items-center gap-2">
-          To-Do List 📋
+        <h1 className="text-3xl font-bold text-yellow-400 mb-6 flex items-center gap-2 tracking-widest">
+          TO-DO LIST
         </h1>
 
         {/* Input Section */}
-        <div className="flex bg-gray-100 p-2 rounded-full items-center">
+        <div className="flex bg-black border border-yellow-400 rounded-full p-2 items-center shadow-[0_0_12px_2px_rgba(255,255,0,0.3)]">
           <input
             type="text"
             value={task}
             onChange={(e) => setTask(e.target.value)}
-            placeholder="Add your task"
-            className="flex-1 bg-transparent px-4 py-2 outline-none text-gray-700 placeholder-gray-500"
+            placeholder="Type your next mission…"
+            className="flex-1 bg-transparent px-4 py-2 outline-none text-yellow-300 placeholder-yellow-600"
           />
+
           <button
             onClick={addTask}
-            className="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-full transition"
+            className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-6 py-2 rounded-full transition shadow-[0_0_10px_2px_rgba(255,255,0,0.7)] hover:shadow-[0_0_20px_4px_rgba(255,255,0,0.9)]"
           >
             ADD
           </button>
@@ -55,30 +60,32 @@ function App() {
           {tasks.map((item, index) => (
             <li
               key={index}
-              className="flex items-center justify-between text-gray-700"
+              className="flex items-center justify-between text-yellow-300 bg-black/40 border border-yellow-400/40 p-3 rounded-xl shadow-[0_0_15px_3px_rgba(255,255,0,0.15)] hover:shadow-[0_0_25px_4px_rgba(255,255,0,0.3)] transition"
             >
               {/* Checkbox + Text */}
               <div className="flex items-center gap-3">
-                
-                {/* Custom circle check */}
+
+                {/* Neon Check Circle */}
                 <div
                   onClick={() => toggleTask(index)}
-                  className={`w-5 h-5 flex items-center justify-center rounded-full border-2 cursor-pointer transition ${
-                    item.done
-                      ? "bg-red-500 border-red-500"
-                      : "border-gray-400"
-                  }`}
+                  className={`w-6 h-6 flex items-center justify-center rounded-full border-2 cursor-pointer transition shadow-[0_0_10px_rgba(255,255,0,0.4)]
+                    ${
+                      item.done
+                        ? "bg-yellow-400 border-yellow-400"
+                        : "border-yellow-600"
+                    }
+                  `}
                 >
                   {item.done && (
-                    <span className="text-white text-sm">✔</span>
+                    <span className="text-black font-bold">✔</span>
                   )}
                 </div>
 
                 <span
-                  className={`${
+                  className={`transition ${
                     item.done
-                      ? "line-through text-gray-400"
-                      : "text-gray-700"
+                      ? "line-through text-yellow-700"
+                      : "text-yellow-300"
                   }`}
                 >
                   {item.text}
@@ -88,7 +95,7 @@ function App() {
               {/* Delete button */}
               <button
                 onClick={() => deleteTask(index)}
-                className="text-gray-400 hover:text-red-500 text-xl font-bold"
+                className="text-yellow-600 hover:text-yellow-400 text-2xl font-extrabold transition"
               >
                 ×
               </button>
@@ -101,4 +108,3 @@ function App() {
 }
 
 export default App;
-
